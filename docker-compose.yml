@@ -34,6 +34,9 @@ services:
       TRADINGAGENTS_MONGODB_URL: mongodb://admin:tradingagents123@mongodb:27017/tradingagents?authSource=admin
       TRADINGAGENTS_REDIS_URL: redis://:tradingagents123@redis:6379
       TRADINGAGENTS_CACHE_TYPE: redis
+      # 强制覆盖 .env 中的主机配置
+      MONGODB_HOST: "mongodb"
+      REDIS_HOST: "redis"
       # Docker环境标识
       DOCKER_CONTAINER: "true"
       # API配置
@@ -106,7 +109,7 @@ services:
       TZ: "Asia/Shanghai"
     volumes:
       - mongodb_data:/data/db
-      - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./scripts/docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
       - tradingagents-network
     healthcheck:
